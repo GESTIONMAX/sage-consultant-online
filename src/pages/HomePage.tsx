@@ -103,31 +103,44 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="hero-gradient pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <div className="flex justify-center mb-6">
-              <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-white">
-                <Award className="w-4 h-4" />
-                <span className="text-sm font-medium">Consultant Sage Certifié</span>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <div className="flex justify-center lg:justify-start mb-6">
+                <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-white">
+                  <Award className="w-4 h-4" />
+                  <span className="text-sm font-medium">Consultant Sage Certifié</span>
+                </div>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Expert Sage 100<br />
+                <span className="text-white/90">pour votre entreprise</span>
+              </h1>
+              
+              <p className="text-xl text-white/80 mb-8 max-w-3xl lg:max-w-none leading-relaxed">
+                Installation, paramétrage, migration et formation Sage 100. 
+                Un accompagnement professionnel pour optimiser votre gestion d'entreprise.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <CTAButton variant="accent" size="lg" icon="calendar">
+                  Prendre rendez-vous gratuit
+                </CTAButton>
+                <Button size="lg" variant="outline" className="text-white border-white/30 hover:bg-white/10">
+                  Découvrir les services
+                </Button>
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Expert Sage 100<br />
-              <span className="text-white/90">pour votre entreprise</span>
-            </h1>
-            
-            <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Installation, paramétrage, migration et formation Sage 100. 
-              Un accompagnement professionnel pour optimiser votre gestion d'entreprise.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CTAButton variant="accent" size="lg" icon="calendar">
-                Prendre rendez-vous gratuit
-              </CTAButton>
-              <Button size="lg" variant="outline" className="text-white border-white/30 hover:bg-white/10">
-                Découvrir les services
-              </Button>
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                <img 
+                  src="/lovable-uploads/9733d6d7-23f6-4351-829c-ae7d5009e901.png" 
+                  alt="Consultant travaillant sur Sage 100 avec tableaux de bord"
+                  className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+              </div>
             </div>
           </div>
         </div>
