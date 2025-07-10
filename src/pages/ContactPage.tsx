@@ -99,14 +99,29 @@ const ContactPage = () => {
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-background to-background-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Contactez-moi
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            Discutons de votre projet Sage 100. Je vous réponds personnellement 
-            et vous propose une solution adaptée à vos besoins.
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+                Contactez-moi
+              </h1>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Discutons de votre projet Sage 100. Je vous réponds personnellement 
+                et vous propose une solution adaptée à vos besoins.
+              </p>
+            </div>
+            
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                <img 
+                  src="/lovable-uploads/9733d6d7-23f6-4351-829c-ae7d5009e901.png" 
+                  alt="Consultant travaillant sur Sage 100 avec tableaux de bord"
+                  className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
