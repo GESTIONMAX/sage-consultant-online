@@ -97,7 +97,7 @@ const AboutPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-6">
-                Julien Moreau
+                Briane LEFEBVRE
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Passionné par les systèmes d'information et fort de 8 années d'expérience 
