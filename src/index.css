@@ -7,16 +7,16 @@
 
 @layer base {
   :root {
-    /* Backgrounds */
-    --background: 0 0% 100%;
-    --background-secondary: 220 14% 98%;
-    --background-muted: 220 14% 96%;
+    /* Backgrounds - Plus doux et professionnels */
+    --background: 250 20% 98%;
+    --background-secondary: 240 15% 96%;
+    --background-muted: 240 12% 94%;
     --foreground: 220 20% 8%;
 
     /* Cards & Surfaces */
     --card: 0 0% 100%;
     --card-foreground: 220 20% 8%;
-    --card-hover: 220 14% 98%;
+    --card-hover: 240 15% 98%;
 
     /* Popover & Modals */
     --popover: 0 0% 100%;
@@ -29,12 +29,12 @@
     --primary-muted: 217 50% 95%;
 
     /* Sophisticated Gray Secondary */
-    --secondary: 220 14% 95%;
+    --secondary: 240 12% 94%;
     --secondary-foreground: 220 20% 8%;
     --secondary-dark: 220 20% 20%;
 
     /* Muted Tones */
-    --muted: 220 14% 96%;
+    --muted: 240 12% 94%;
     --muted-foreground: 220 8% 46%;
 
     /* Success Green Accent */
@@ -48,10 +48,10 @@
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    /* Borders & Inputs */
-    --border: 220 13% 91%;
-    --border-muted: 220 13% 94%;
-    --input: 220 13% 91%;
+    /* Borders & Inputs - Plus subtiles */
+    --border: 240 8% 88%;
+    --border-muted: 240 8% 92%;
+    --input: 240 8% 90%;
     --ring: 217 91% 24%;
 
     /* Design System Variables */
