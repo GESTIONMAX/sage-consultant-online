@@ -66,6 +66,7 @@ const Footer = () => {
               <Link to="/legal" className="hover:text-foreground transition-smooth">Mentions légales</Link>
               <Link to="/privacy" className="hover:text-foreground transition-smooth">Confidentialité</Link>
               <Link to="/terms" className="hover:text-foreground transition-smooth">CGV</Link>
+              <Link to="/admin-login" className="hover:text-foreground transition-smooth opacity-50 hover:opacity-100">Admin</Link>
             </div>
           </div>
         </div>

@@ -10,7 +10,14 @@ import ServicesPage from "./pages/ServicesPage";
 import ContactPage from "./pages/ContactPage";
 import BlogPage from "./pages/BlogPage";
 import ClientDashboard from "./pages/ClientDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import { Login } from "./pages/Login";
+import ClientLogin from "./pages/ClientLogin";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import DebugAdmin from "./pages/DebugAdmin";
+import AdminLogin from "./pages/AdminLogin";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +35,14 @@ const App = () => (
             <Route path="contact" element={<ContactPage />} />
             <Route path="blog" element={<BlogPage />} />
             <Route path="client" element={<ClientDashboard />} />
+            <Route path="admin" element={<AdminDashboard />} />
           </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="client-login" element={<ClientLogin />} />
+          <Route path="admin-login" element={<AdminLogin />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password" element={<ResetPassword />} />
+          <Route path="debug-admin" element={<DebugAdmin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

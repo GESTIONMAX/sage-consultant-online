@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Settings, Calendar } from "lucide-react";
+import { Menu, X, Settings, Calendar, ShieldCheck } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user } = useAuth(); // Récupérer les informations de l'utilisateur connecté
 
   const navigation = [
     { name: "Accueil", href: "/" },
@@ -50,7 +52,16 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/client">
+            {/* Bouton Admin - visible seulement pour les administrateurs */}
+            {user && user.role === 'admin' && (
+              <Link to="/admin">
+                <Button variant="outline" size="sm" className="bg-yellow-100 border-yellow-300 text-yellow-800 hover:bg-yellow-200">
+                  <ShieldCheck className="w-4 h-4 mr-2" />
+                  Admin
+                </Button>
+              </Link>
+            )}
+            <Link to="/client-login">
               <Button variant="outline" size="sm">
                 Espace Client
               </Button>
@@ -92,7 +103,16 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="pt-4 space-y-2">
-                <Link to="/client">
+                {/* Bouton Admin mobile - visible seulement pour les administrateurs */}
+                {user && user.role === 'admin' && (
+                  <Link to="/admin">
+                    <Button variant="outline" className="w-full bg-yellow-100 border-yellow-300 text-yellow-800 hover:bg-yellow-200 mb-2">
+                      <ShieldCheck className="w-4 h-4 mr-2" />
+                      Espace Admin
+                    </Button>
+                  </Link>
+                )}
+                <Link to="/client-login">
                   <Button variant="outline" className="w-full">
                     Espace Client
                   </Button>
