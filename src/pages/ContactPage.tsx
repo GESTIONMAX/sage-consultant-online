@@ -68,13 +68,13 @@ const ContactPage = () => {
     {
       icon: <Phone className="w-5 h-5" />,
       title: "Téléphone", 
-      value: "01 23 45 67 89",
+      value: "06 61 32 41 46",
       description: "Du lundi au vendredi, 9h-18h"
     },
     {
       icon: <MapPin className="w-5 h-5" />,
       title: "Zone d'intervention",
-      value: "Île-de-France",
+      value: "Antibes PACA",
       description: "Intervention sur site ou à distance"
     },
     {
@@ -205,7 +205,7 @@ const ContactPage = () => {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
-                    placeholder="01 23 45 67 89"
+                    placeholder="06 61 32 41 46"
                   />
                 </div>
               </div>
@@ -310,7 +310,7 @@ const ContactPage = () => {
                 Joignez-moi directement pour une première discussion
               </p>
               <Button variant="outline" size="sm" className="w-full">
-                01 23 45 67 89
+                06 61 32 41 46
               </Button>
             </div>
             
