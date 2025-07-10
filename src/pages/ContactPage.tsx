@@ -27,6 +27,7 @@ const ContactPage = () => {
     revendeur: "",
     numeroLicenceSage: "",
     serviceType: "",
+    delaiProjet: "",
     message: "",
     urgency: "normal"
   });
@@ -50,6 +51,7 @@ const ContactPage = () => {
       revendeur: "",
       numeroLicenceSage: "",
       serviceType: "",
+      delaiProjet: "",
       message: "",
       urgency: "normal"
     });
@@ -249,7 +251,7 @@ const ContactPage = () => {
                 </div>
               </div>
 
-              {/* Type de service */}
+              {/* Type de service et délai */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="serviceType">Type de service *</Label>
@@ -267,19 +269,35 @@ const ContactPage = () => {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="urgency">Urgence</Label>
-                  <Select value={formData.urgency} onValueChange={(value) => handleInputChange("urgency", value)}>
+                  <Label htmlFor="delaiProjet">Délai du projet</Label>
+                  <Select value={formData.delaiProjet} onValueChange={(value) => handleInputChange("delaiProjet", value)}>
                     <SelectTrigger>
-                      <SelectValue />
+                      <SelectValue placeholder="Délai souhaité" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="low">Pas d'urgence</SelectItem>
-                      <SelectItem value="normal">Normal (48h)</SelectItem>
-                      <SelectItem value="high">Urgent (24h)</SelectItem>
-                      <SelectItem value="critical">Critique (4h)</SelectItem>
+                      <SelectItem value="asap">Dans la semaine</SelectItem>
+                      <SelectItem value="1month">Dans le mois</SelectItem>
+                      <SelectItem value="3months">Dans les 3 mois</SelectItem>
+                      <SelectItem value="6months">Dans les 6 mois</SelectItem>
+                      <SelectItem value="flexible">Flexible</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="urgency">Urgence</Label>
+                <Select value={formData.urgency} onValueChange={(value) => handleInputChange("urgency", value)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="low">Pas d'urgence</SelectItem>
+                    <SelectItem value="normal">Normal (48h)</SelectItem>
+                    <SelectItem value="high">Urgent (24h)</SelectItem>
+                    <SelectItem value="critical">Critique (4h)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Message */}
