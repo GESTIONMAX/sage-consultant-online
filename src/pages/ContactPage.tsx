@@ -24,6 +24,8 @@ const ContactPage = () => {
     email: "",
     phone: "",
     company: "",
+    revendeur: "",
+    numeroLicenceSage: "",
     serviceType: "",
     message: "",
     urgency: "normal"
@@ -45,6 +47,8 @@ const ContactPage = () => {
       email: "",
       phone: "",
       company: "",
+      revendeur: "",
+      numeroLicenceSage: "",
       serviceType: "",
       message: "",
       urgency: "normal"
@@ -219,6 +223,30 @@ const ContactPage = () => {
                   onChange={(e) => handleInputChange("company", e.target.value)}
                   placeholder="Nom de votre entreprise"
                 />
+              </div>
+
+              {/* Informations Sage */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="revendeur">Revendeur</Label>
+                  <Input
+                    id="revendeur"
+                    type="text"
+                    value={formData.revendeur}
+                    onChange={(e) => handleInputChange("revendeur", e.target.value)}
+                    placeholder="Nom de votre revendeur Sage"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="numeroLicenceSage">N° de licence SAGE</Label>
+                  <Input
+                    id="numeroLicenceSage"
+                    type="text"
+                    value={formData.numeroLicenceSage}
+                    onChange={(e) => handleInputChange("numeroLicenceSage", e.target.value)}
+                    placeholder="Numéro de licence Sage 100"
+                  />
+                </div>
               </div>
 
               {/* Type de service */}
