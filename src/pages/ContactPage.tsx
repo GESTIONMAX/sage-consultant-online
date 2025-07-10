@@ -62,7 +62,7 @@ const ContactPage = () => {
     {
       icon: <Mail className="w-5 h-5" />,
       title: "Email",
-      value: "contact@sas1gestion.fr",
+      value: "briane@1cgestion.fr",
       description: "Réponse sous 24h"
     },
     {
