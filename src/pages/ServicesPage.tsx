@@ -130,7 +130,7 @@ const ServicesPage = () => {
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-background to-background-secondary overflow-hidden">
         {/* Pattern Background */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 25px 25px, hsl(var(--primary)) 2px, transparent 2px)`,
             backgroundSize: '50px 50px'
@@ -138,10 +138,10 @@ const ServicesPage = () => {
         </div>
         
         {/* Geometric shapes */}
-        <div className="absolute top-10 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl"></div>
-        <div className="absolute top-32 right-20 w-16 h-16 bg-accent/10 rounded-lg rotate-45 blur-lg"></div>
-        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-secondary-dark/10 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-32 right-1/3 w-12 h-12 bg-primary/10 rotate-12 blur-lg"></div>
+        <div className="absolute top-10 left-10 w-20 h-20 bg-primary/30 rounded-full blur-xl"></div>
+        <div className="absolute top-32 right-20 w-16 h-16 bg-accent/25 rounded-lg rotate-45 blur-lg"></div>
+        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-muted/40 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-32 right-1/3 w-12 h-12 bg-primary/25 rotate-12 blur-lg"></div>
         
         {/* Content */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
