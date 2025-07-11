@@ -62,7 +62,41 @@ This project is built with:
 
 ## How can I deploy this project?
 
+### Option 1: Using Lovable
+
 Simply open [Lovable](https://lovable.dev/projects/b0ea48de-2420-4fca-9fb6-d9986ccc31e1) and click on Share -> Publish.
+
+### Option 2: Deployment with Coolify
+
+This project is configured for deployment with Coolify. The following files have been added to support this:
+
+- `Dockerfile` - Configuration pour la construction de l'image Docker
+- `nginx.conf` - Configuration NGINX optimisée pour une SPA React
+- `.dockerignore` - Liste des fichiers à exclure du conteneur Docker
+- `docker-compose.yml` - Configuration pour l'exécution multi-conteneur
+
+#### Étapes de déploiement sur Coolify
+
+1. **Prérequis**
+   - Un serveur Coolify configuré
+   - Accès à votre dépôt Git
+
+2. **Configuration de l'environnement**
+   Configurer les variables d'environnement suivantes dans Coolify:
+   ```
+   VITE_SUPABASE_URL=https://votre-instance-supabase.url
+   VITE_SUPABASE_ANON_KEY=votre-clé-anon-supabase
+   ```
+
+3. **Déploiement**
+   - Connectez votre dépôt Git à Coolify
+   - Sélectionnez la branche à déployer
+   - Utilisez la configuration Docker détectée automatiquement
+   - Lancez le build et le déploiement
+
+4. **Vérification**
+   - Une fois le déploiement terminé, vérifiez que l'application fonctionne correctement
+   - Vérifiez la connexion à Supabase
 
 ## Can I connect a custom domain to my Lovable project?
 
