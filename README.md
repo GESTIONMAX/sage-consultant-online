@@ -68,35 +68,54 @@ Simply open [Lovable](https://lovable.dev/projects/b0ea48de-2420-4fca-9fb6-d9986
 
 ### Option 2: Deployment with Coolify
 
-This project is configured for deployment with Coolify. The following files have been added to support this:
+Ce projet est configuré pour le déploiement avec Coolify selon trois méthodes différentes. Les fichiers suivants ont été ajoutés pour supporter ces méthodes :
 
 - `Dockerfile` - Configuration pour la construction de l'image Docker
 - `nginx.conf` - Configuration NGINX optimisée pour une SPA React
 - `.dockerignore` - Liste des fichiers à exclure du conteneur Docker
-- `docker-compose.yml` - Configuration pour l'exécution multi-conteneur
+- `docker-compose.yml` - Configuration avec labels Traefik pour SPA
+- `nixpacks.toml` - Configuration pour déploiement sans Docker
+- `public/_redirects` - Gestion des routes SPA
+- `.github/workflows/ci-cd.yml` - Workflow GitHub pour intégration continue
 
-#### Étapes de déploiement sur Coolify
+#### Méthodes de déploiement sur Coolify
 
-1. **Prérequis**
-   - Un serveur Coolify configuré
-   - Accès à votre dépôt Git
+1. **Méthode Dockerfile**
+   - Utilise l'image Node.js 18-alpine
+   - Génère automatiquement un fichier `.env.production`
+   - Optimise la configuration NGINX pour SPA
 
-2. **Configuration de l'environnement**
-   Configurer les variables d'environnement suivantes dans Coolify:
+2. **Méthode docker-compose.yml**
+   - Pour déploiement en Service Stack avec configuration avancée
+   - Utilise des labels Traefik spécifiques pour SPA
+   - Inclut l'intégration réseau Traefik
+
+3. **Méthode nixpacks.toml**
+   - Force la détection comme application Node.js
+   - Ne nécessite pas Docker
+   - Simplifie le processus de déploiement
+
+#### Configuration de l'environnement
+
+Configurer les variables d'environnement suivantes dans Coolify :
+```
+VITE_SUPABASE_URL=https://supabasekong-ww404kssg04kgkc0ksc84o08.gestionmax.fr
+VITE_SUPABASE_ANON_KEY=votre-clé-anon-supabase
+DOMAIN=votre-domaine.com
+COMPOSE_PROJECT_NAME=sage-consultant-online
+```
+
+#### Déploiement automatique avec GitHub Actions
+
+Pour activer le déploiement automatique via GitHub Actions :
+1. Créez un webhook dans Coolify pour votre application
+2. Ajoutez les secrets suivants dans votre dépôt GitHub :
    ```
-   VITE_SUPABASE_URL=https://votre-instance-supabase.url
+   COOLIFY_WEBHOOK_URL=https://votre-url-coolify-webhook
+   VITE_SUPABASE_URL=https://supabasekong-ww404kssg04kgkc0ksc84o08.gestionmax.fr
    VITE_SUPABASE_ANON_KEY=votre-clé-anon-supabase
    ```
-
-3. **Déploiement**
-   - Connectez votre dépôt Git à Coolify
-   - Sélectionnez la branche à déployer
-   - Utilisez la configuration Docker détectée automatiquement
-   - Lancez le build et le déploiement
-
-4. **Vérification**
-   - Une fois le déploiement terminé, vérifiez que l'application fonctionne correctement
-   - Vérifiez la connexion à Supabase
+3. Chaque push sur les branches main/master déclenchera automatiquement un déploiement
 
 ## Can I connect a custom domain to my Lovable project?
 

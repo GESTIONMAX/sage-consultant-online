@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ['nodejs', 'nodejs.npm']
+
+[phases.install]
+cmds = ['npm ci']
+
+[phases.build]
+cmds = ['npm run build']
+
+[start]
+cmd = 'npm exec -- serve -s dist'
+
+[variables]
+NODE_ENV = 'production'

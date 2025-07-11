@@ -1,13 +1,28 @@
 version: '3'
 
+networks:
+  traefik-public:
+    external: true
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "80:80"
+    networks:
+      - traefik-public
     environment:
       - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
       - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=80"
+      # Configuration pour SPA
+      - "traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-spa.errors.status=404"
+      - "traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-spa.errors.service=${COMPOSE_PROJECT_NAME}"
+      - "traefik.http.middlewares.${COMPOSE_PROJECT_NAME}-spa.errors.query=/"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=${COMPOSE_PROJECT_NAME}-spa"
