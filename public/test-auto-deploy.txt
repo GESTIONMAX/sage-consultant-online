@@ -1,0 +1,2 @@
+Ce fichier test a été créé pour vérifier le déploiement automatique via webhook GitHub.
+Date de création : 2025-07-12
