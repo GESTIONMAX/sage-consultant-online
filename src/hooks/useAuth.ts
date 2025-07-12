@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Session, User } from '@supabase/supabase-js';
-import { supabase } from "../lib/supabase";
+import { supabase } from "../lib";
 
 // Type pour représenter un utilisateur enrichi avec les données de la base
 interface EnhancedUser extends User {

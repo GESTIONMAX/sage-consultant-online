@@ -10,8 +10,24 @@ RUN npm ci
 COPY . .
 
 # Création d'un fichier .env.production avec les variables d'environnement
+ARG VITE_SUPABASE_URL
+ARG VITE_SUPABASE_ANON_KEY
+
+ENV VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+ENV VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+
 RUN echo "VITE_SUPABASE_URL=${VITE_SUPABASE_URL}" > .env.production
 RUN echo "VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}" >> .env.production
+
+# Force Vite à utiliser le mode production pour éviter les erreurs de résolution de modules
+ENV NODE_ENV=production
+
+# Créer un tsconfig temporaire qui force l'inclusion de tous les dossiers src
+RUN echo '{"compilerOptions":{"baseUrl":".","paths":{"@/*":["./src/*"]}},"include":["src/**/*"]}' > tsconfig.json.build
+RUN cat tsconfig.json.build >> tsconfig.json
+
+# Réparer les imports problématiques si nécessaire
+RUN find ./src -name "*.ts" -o -name "*.tsx" | xargs grep -l "../lib/supabase" | xargs -r sed -i 's|../lib/supabase|../lib|g'
 
 # Build de l'application
 RUN npm run build

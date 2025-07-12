@@ -1,9 +1,9 @@
+/* SAS 1 GESTION Design System - Professional Sage 100 Consultant */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* SAS 1 GESTION Design System - Professional Sage 100 Consultant */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
