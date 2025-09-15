@@ -91,9 +91,10 @@ export default function AdminBlogManager() {
       })) || [];
       
       setPosts(formattedData);
-    } catch (error: any) {
-      console.error('Erreur lors du chargement des articles:', error.message);
-      setError(error.message);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
+      console.error('Erreur lors du chargement des articles:', errorMessage);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -119,8 +120,9 @@ export default function AdminBlogManager() {
       if (error && error.code === '42P01') { // Code PostgreSQL pour "relation does not exist"
         setError("La table des articles de blog n'existe pas encore. Veuillez contacter l'administrateur pour la créer.");
       }
-    } catch (error: any) {
-      console.error('Erreur lors de la vérification de la table blog:', error.message);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
+      console.error('Erreur lors de la vérification de la table blog:', errorMessage);
     }
   };
   
@@ -230,11 +232,12 @@ export default function AdminBlogManager() {
       
       handleClose();
       fetchPosts();
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
       console.error('Erreur lors de l\'enregistrement:', error);
       setSnackbar({
         open: true,
-        message: `Erreur: ${error.message}`,
+        message: `Erreur: ${errorMessage}`,
         severity: 'error'
       });
     }
@@ -258,11 +261,12 @@ export default function AdminBlogManager() {
         });
         
         fetchPosts();
-      } catch (error: any) {
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
         console.error('Erreur lors de la suppression:', error);
         setSnackbar({
           open: true,
-          message: `Erreur: ${error.message}`,
+          message: `Erreur: ${errorMessage}`,
           severity: 'error'
         });
       }
@@ -286,11 +290,12 @@ export default function AdminBlogManager() {
       });
       
       fetchPosts();
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
       console.error('Erreur lors de la modification du statut:', error);
       setSnackbar({
         open: true,
-        message: `Erreur: ${error.message}`,
+        message: `Erreur: ${errorMessage}`,
         severity: 'error'
       });
     }

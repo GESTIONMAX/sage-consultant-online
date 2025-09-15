@@ -25,7 +25,7 @@ import {
 } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { supabase } from '../../lib/supabase';
-import type { User, UpdateUser } from '../../types/supabase';
+import type { UpdateUser } from '../../types/supabase';
 
 interface UserWithServices {
   id: string;

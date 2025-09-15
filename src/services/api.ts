@@ -1,12 +1,12 @@
 import { supabase } from '../lib/supabase';
 import type {
-  User, NewUser, UpdateUser,
+  User, UpdateUser,
   Service, NewService, UpdateService,
   ServiceFeature, NewServiceFeature,
   ClientService, NewClientService, UpdateClientService,
   Document, NewDocument, UpdateDocument,
   Meeting, NewMeeting, UpdateMeeting,
-  Message, NewMessage, UpdateMessage,
+  Message, NewMessage,
   Testimonial, NewTestimonial, UpdateTestimonial
 } from '../types/supabase';
 
@@ -254,19 +254,19 @@ export const documentsApi = {
 
   // Upload un fichier au stockage Supabase
   uploadFile: async (file: File, path: string) => {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .storage
       .from('documents')
       .upload(path, file);
-      
+
     if (error) throw error;
-    
+
     // Obtenir l'URL publique du fichier
     const { data: urlData } = supabase
       .storage
       .from('documents')
       .getPublicUrl(path);
-      
+
     return urlData.publicUrl;
   },
 };

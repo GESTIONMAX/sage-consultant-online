@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react';
-import { 
-  Box, 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
-  Paper, 
-  Button, 
+import {
+  Box,
+  Paper,
+  Button,
   IconButton,
   TextField,
   Dialog,

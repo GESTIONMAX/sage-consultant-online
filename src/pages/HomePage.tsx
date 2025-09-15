@@ -2,13 +2,11 @@ import { Button } from "@/components/ui/button";
 import ServiceCard from "@/components/ui/ServiceCard";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import CTAButton from "@/components/ui/CTAButton";
-import { 
-  Settings, 
-  Users, 
-  Zap, 
-  GraduationCap, 
-  CheckCircle, 
-  Star,
+import {
+  Settings,
+  Users,
+  Zap,
+  GraduationCap,
   Award,
   Clock,
   Shield

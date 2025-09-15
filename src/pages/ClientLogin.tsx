@@ -33,7 +33,7 @@ export default function ClientLogin() {
       setIsLoading(true);
       setError(null);
       
-      const { data, error } = await signInWithEmail(email, password);
+      const { error } = await signInWithEmail(email, password);
       
       if (error) {
         setError('Identifiants incorrects. Veuillez réessayer.');

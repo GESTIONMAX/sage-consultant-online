@@ -3,11 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import CTAButton from "@/components/ui/CTAButton";
-import { 
-  Download, 
-  Calendar, 
-  Clock, 
-  CheckCircle, 
+import {
+  Download,
+  Calendar,
+  Clock,
   FileText,
   MessageSquare,
   Settings,

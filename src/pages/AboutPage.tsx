@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button";
 import CTAButton from "@/components/ui/CTAButton";
-import { Award, Users, Clock, Target, BookOpen, Handshake } from "lucide-react";
+import { Award, Target, BookOpen, Handshake } from "lucide-react";
 
 const AboutPage = () => {
   const certifications = [
