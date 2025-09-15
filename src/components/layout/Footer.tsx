@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
-import { Settings, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-background-secondary border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
+          {/* Brand avec Logo Sage */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Settings className="w-5 h-5 text-primary-foreground" />
+            <div className="flex items-center space-x-3 mb-4">
+              <img
+                src="/sage-logo-green.svg"
+                alt="Sage Logo"
+                className="h-10 w-auto"
+              />
+              <div>
+                <span className="font-bold text-xl text-sage-dark block">SAS 1 GESTION</span>
+                <span className="text-sm text-sage-primary font-medium">Consultant Sage Certifié</span>
               </div>
-              <span className="font-bold text-xl text-primary">SAS 1 GESTION</span>
             </div>
             <p className="text-muted-foreground max-w-md mb-4">
               Consultant indépendant certifié Sage ligne 100. Spécialisé dans l'installation, 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from "../lib";
+import { logger } from '../lib/config';
 
 // Type pour représenter un utilisateur enrichi avec les données de la base
 interface EnhancedUser extends User {
@@ -21,7 +22,7 @@ export function useAuth() {
   const fetchUserData = async (authUser: User | null): Promise<EnhancedUser | null> => {
     if (!authUser) return null;
     
-    console.log('Récupération des données utilisateur pour:', authUser.email);
+    logger.log('Récupération des données utilisateur pour:', authUser.email);
     
     // Récupérer les informations utilisateur depuis la table users
     const { data, error } = await supabase
@@ -32,12 +33,12 @@ export function useAuth() {
     
     if (error) {
       console.error('Error fetching user data:', error);
-      console.log('Aucune entrée trouvée dans la table users pour cet utilisateur, vérifiez que la table users contient une entrée pour', authUser.id);
+      logger.log('Aucune entrée trouvée dans la table users pour cet utilisateur, vérifiez que la table users contient une entrée pour', authUser.id);
       // Retourner l'utilisateur avec un rôle par défaut 'client'
       return { ...authUser, role: 'client' } as EnhancedUser;
     }
     
-    console.log('Données utilisateur récupérées:', data);
+    logger.log('Données utilisateur récupérées:', data);
     
     // Combiner les données d'authentification avec les données de la base
     const enhancedUser = { 
@@ -50,7 +51,7 @@ export function useAuth() {
       client_since: data?.client_since
     };
     
-    console.log('Utilisateur enrichi avec rôle:', enhancedUser.role);
+    logger.log('Utilisateur enrichi avec rôle:', enhancedUser.role);
     return enhancedUser;
   };
 

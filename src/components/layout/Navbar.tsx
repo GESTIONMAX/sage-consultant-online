@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Settings, Calendar, ShieldCheck } from "lucide-react";
+import { Menu, X, Calendar, ShieldCheck } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 
 const Navbar = () => {
@@ -25,12 +25,15 @@ const Navbar = () => {
     <nav className="fixed top-0 w-full z-50 navbar-blur">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Settings className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="font-bold text-xl text-primary">SAS 1 GESTION</span>
+          {/* Logo avec Sage */}
+          <Link to="/" className="flex items-center space-x-3">
+            <img
+              src="/sage-logo-green.svg"
+              alt="Sage Logo"
+              className="h-8 w-auto"
+            />
+            <span className="font-bold text-xl text-sage-dark">SAS 1 GESTION</span>
+            <span className="text-sm text-sage-primary font-medium hidden sm:block">Consultant Sage Certifié</span>
           </Link>
 
           {/* Desktop Navigation */}

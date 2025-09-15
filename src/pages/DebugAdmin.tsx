@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../lib/supabase';
+import { logger } from '../lib/config';
 import {
   Box,
   Container,
@@ -104,8 +105,8 @@ export default function DebugAdmin() {
 
   // Afficher les informations de débogage
   useEffect(() => {
-    console.log('DebugAdmin - User:', user);
-    console.log('DebugAdmin - User role:', user?.role);
+    logger.log('DebugAdmin - User:', user);
+    logger.log('DebugAdmin - User role:', user?.role);
   }, [user]);
 
   return (

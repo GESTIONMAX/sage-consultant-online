@@ -23,6 +23,15 @@ export default {
 				sans: ['Inter', 'sans-serif'],
 			},
 			colors: {
+				// Sage Official Colors
+				sage: {
+					primary: 'hsl(var(--sage-primary))',     // #00DC06
+					secondary: 'hsl(var(--sage-secondary))', // #008a25
+					dark: 'hsl(var(--sage-dark))',          // #333333
+					light: 'hsl(var(--sage-light))',        // #f5f5f5
+					white: 'hsl(var(--sage-white))',        // #ffffff
+					black: 'hsl(var(--sage-black))',        // #000000
+				},
 				border: 'hsl(var(--border))',
 				'border-muted': 'hsl(var(--border-muted))',
 				input: 'hsl(var(--input))',

@@ -7,40 +7,48 @@
 
 @layer base {
   :root {
-    /* Backgrounds - Plus doux et professionnels */
-    --background: 250 20% 98%;
-    --background-secondary: 240 15% 96%;
-    --background-muted: 240 12% 94%;
-    --foreground: 220 20% 8%;
+    /* Sage Official Colors */
+    --sage-primary: 135 100% 31%;    /* #009e2a */
+    --sage-secondary: 120 100% 27%;  /* #008a25 */
+    --sage-dark: 0 0% 20%;          /* #333333 */
+    --sage-light: 0 0% 96%;         /* #f5f5f5 */
+    --sage-white: 0 0% 100%;        /* #ffffff */
+    --sage-black: 0 0% 0%;          /* #000000 */
+
+    /* Backgrounds - Sage inspired */
+    --background: var(--sage-white);
+    --background-secondary: var(--sage-light);
+    --background-muted: 120 10% 97%;
+    --foreground: var(--sage-dark);
 
     /* Cards & Surfaces */
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 8%;
-    --card-hover: 240 15% 98%;
+    --card: var(--sage-white);
+    --card-foreground: var(--sage-dark);
+    --card-hover: 120 20% 98%;
 
     /* Popover & Modals */
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 8%;
+    --popover: var(--sage-white);
+    --popover-foreground: var(--sage-dark);
 
-    /* Professional Blue Primary */
-    --primary: 217 91% 24%;
-    --primary-glow: 217 91% 35%;
-    --primary-foreground: 0 0% 100%;
-    --primary-muted: 217 50% 95%;
+    /* Black Primary (tous les boutons primaires en noir) */
+    --primary: var(--sage-black);
+    --primary-glow: var(--sage-dark);
+    --primary-foreground: var(--sage-white);
+    --primary-muted: 0 0% 95%;
 
-    /* Sophisticated Gray Secondary */
-    --secondary: 240 12% 94%;
-    --secondary-foreground: 220 20% 8%;
-    --secondary-dark: 220 20% 20%;
+    /* Black Secondary (tous les boutons secondaires en noir) */
+    --secondary: var(--sage-black);
+    --secondary-foreground: var(--sage-white);
+    --secondary-dark: var(--sage-dark);
 
-    /* Muted Tones */
-    --muted: 240 12% 94%;
-    --muted-foreground: 220 8% 46%;
+    /* Muted Tones with Sage hint */
+    --muted: 120 10% 94%;
+    --muted-foreground: 120 5% 46%;
 
-    /* Success Green Accent */
-    --accent: 158 64% 52%;
-    --accent-light: 158 64% 95%;
-    --accent-foreground: 0 0% 100%;
+    /* Black Accent (tous les accents en noir) */
+    --accent: var(--sage-black);
+    --accent-light: 0 0% 95%;
+    --accent-foreground: var(--sage-white);
 
     /* System Colors */
     --destructive: 0 84% 60%;
@@ -48,30 +56,30 @@
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    /* Borders & Inputs - Plus subtiles */
-    --border: 240 8% 88%;
-    --border-muted: 240 8% 92%;
-    --input: 240 8% 90%;
-    --ring: 217 91% 24%;
+    /* Borders & Inputs - Sage themed */
+    --border: 135 15% 88%;
+    --border-muted: 135 10% 92%;
+    --input: 135 10% 90%;
+    --ring: var(--sage-primary);
 
     /* Design System Variables */
     --radius: 0.75rem;
     --radius-sm: 0.5rem;
     --radius-lg: 1rem;
 
-    /* Professional Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    /* Sage Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--sage-primary)), hsl(135 100% 35%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--sage-secondary)) 0%, hsl(var(--sage-primary)) 100%);
     --gradient-card: linear-gradient(145deg, hsl(var(--background)) 0%, hsl(var(--background-secondary)) 100%);
     --gradient-muted: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background-muted)) 100%);
 
-    /* Professional Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(var(--primary) / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(var(--primary) / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(var(--primary) / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(var(--primary) / 0.15);
-    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.2);
-    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+    /* Sage Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(var(--sage-primary) / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(var(--sage-primary) / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(var(--sage-primary) / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(var(--sage-primary) / 0.15);
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--sage-primary) / 0.2);
+    --shadow-glow: 0 0 40px hsl(var(--sage-primary) / 0.3);
 
     /* Smooth Transitions */
     --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -199,25 +207,38 @@
     @apply hover:shadow-elegant transition-smooth;
   }
 
-  /* Professional button variants */
+  /* Professional button variants - All BLACK */
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary-glow;
+    @apply bg-sage-black text-sage-white hover:bg-sage-dark;
     @apply shadow-md hover:shadow-elegant transition-smooth;
   }
-  
+
   .btn-secondary {
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
-    @apply border border-border hover:border-primary/30 transition-smooth;
+    @apply bg-sage-black text-sage-white hover:bg-sage-dark;
+    @apply border border-sage-black hover:border-sage-dark transition-smooth;
   }
-  
+
   .btn-accent {
-    @apply bg-accent text-accent-foreground hover:bg-accent/90;
+    @apply bg-sage-black text-sage-white hover:bg-sage-dark;
+    @apply shadow-md hover:shadow-lg transition-smooth;
+  }
+
+  .btn-black {
+    @apply bg-sage-black text-sage-white hover:bg-sage-dark;
     @apply shadow-md hover:shadow-lg transition-smooth;
   }
 
   /* Professional text effects */
   .text-gradient {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+    background: linear-gradient(135deg, hsl(var(--sage-primary)), hsl(var(--sage-secondary)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Sage text colors */
+  .text-sage {
+    color: hsl(var(--sage-primary));
   }
 
   /* Navbar styling */

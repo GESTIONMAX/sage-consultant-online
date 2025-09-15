@@ -14,6 +14,7 @@ import {
   IconButton
 } from '@mui/material';
 import { useAuth } from '../hooks/useAuth';
+import { logger } from '../lib/config';
 import { Visibility, VisibilityOff, AdminPanelSettings } from '@mui/icons-material';
 
 export default function AdminLogin() {
@@ -36,10 +37,10 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      console.log('Tentative de connexion admin avec:', email);
+      logger.log('Tentative de connexion admin avec:', email);
       // Attendre la connexion
       const result = await signInWithEmail(email, password);
-      console.log('Résultat de connexion:', result);
+      logger.log('Résultat de connexion:', result);
 
       if (result.error) {
         throw new Error(result.error.message);
@@ -50,10 +51,10 @@ export default function AdminLogin() {
         // L'état de l'utilisateur a été mis à jour automatiquement par useAuth
         // Le useEffect au début du composant redirigera vers /admin si l'utilisateur est admin
         if (user?.role === 'admin') {
-          console.log('Utilisateur admin déjà détecté, redirection automatique');
+          logger.log('Utilisateur admin déjà détecté, redirection automatique');
           navigate('/admin');
         } else {
-          console.log('Rôle utilisateur non admin ou pas encore chargé:', user?.role);
+          logger.log('Rôle utilisateur non admin ou pas encore chargé:', user?.role);
           setError('Accès refusé. Seuls les administrateurs peuvent se connecter ici. Si vous êtes administrateur, veuillez patienter ou rafraîchir la page.');
           setLoading(false);
         }

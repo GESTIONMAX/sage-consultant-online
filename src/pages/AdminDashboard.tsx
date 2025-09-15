@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { logger } from '../lib/config';
 import AdminClientsManager from '../components/admin/AdminClientsManager';
 import AdminServicesManager from '../components/admin/AdminServicesManager';
 import AdminTestimonialsManager from '../components/admin/AdminTestimonialsManager';
@@ -41,12 +42,12 @@ function AdminDashboard() {
   // Vérifier si l'utilisateur est un administrateur
   useEffect(() => {
     // Ajouter des logs pour le débogage
-    console.log('AdminDashboard - User:', user);
-    console.log('AdminDashboard - User role:', user?.role);
-    console.log('AdminDashboard - Loading:', loading);
+    logger.log('AdminDashboard - User:', user);
+    logger.log('AdminDashboard - User role:', user?.role);
+    logger.log('AdminDashboard - Loading:', loading);
     
     if (!loading && (!user || user.role !== 'admin')) {
-      console.log('Accès non autorisé - Redirection');
+      logger.log('Accès non autorisé - Redirection');
       // Rediriger si l'utilisateur n'est pas un administrateur
       navigate('/');
     }

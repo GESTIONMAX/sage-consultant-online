@@ -106,9 +106,14 @@ const HomePage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
               <div className="flex justify-center lg:justify-start mb-6">
-                <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-white">
-                  <Award className="w-4 h-4" />
+                <div className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 text-white">
+                  <img
+                    src="/sage-logo-green.svg"
+                    alt="Sage Logo"
+                    className="h-6 w-auto"
+                  />
                   <span className="text-sm font-medium">Consultant Sage Certifié</span>
+                  <Award className="w-4 h-4" />
                 </div>
               </div>
               
