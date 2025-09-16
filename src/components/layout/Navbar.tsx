@@ -45,7 +45,7 @@ const Navbar = () => {
                 className={`transition-smooth px-3 py-2 rounded-md text-sm font-medium ${
                   isActive(item.href)
                     ? "text-primary bg-primary-muted"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background-secondary"
+                    : "text-muted-foreground hover:text-sage-black hover:bg-sage-light/30"
                 }`}
               >
                 {item.name}
@@ -58,7 +58,7 @@ const Navbar = () => {
             {/* Bouton Admin - visible seulement pour les administrateurs */}
             {user && user.role === 'admin' && (
               <Link to="/admin">
-                <Button variant="outline" size="sm" className="bg-yellow-100 border-yellow-300 text-yellow-800 hover:bg-yellow-200">
+                <Button variant="outline" size="sm" className="bg-sage-light border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white">
                   <ShieldCheck className="w-4 h-4 mr-2" />
                   Admin
                 </Button>
@@ -98,7 +98,7 @@ const Navbar = () => {
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-smooth ${
                     isActive(item.href)
                       ? "text-primary bg-primary-muted"
-                      : "text-muted-foreground hover:text-foreground hover:bg-background-secondary"
+                      : "text-muted-foreground hover:text-sage-black hover:bg-sage-light/30"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -109,7 +109,7 @@ const Navbar = () => {
                 {/* Bouton Admin mobile - visible seulement pour les administrateurs */}
                 {user && user.role === 'admin' && (
                   <Link to="/admin">
-                    <Button variant="outline" className="w-full bg-yellow-100 border-yellow-300 text-yellow-800 hover:bg-yellow-200 mb-2">
+                    <Button variant="outline" className="w-full bg-sage-light border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white mb-2">
                       <ShieldCheck className="w-4 h-4 mr-2" />
                       Espace Admin
                     </Button>

@@ -143,7 +143,7 @@ const BlogPage = () => {
                   <span>{articles[0].readTime} de lecture</span>
                 </div>
               </div>
-              <Button className="bg-white text-primary hover:bg-white/90">
+              <Button className="bg-sage-white text-sage-primary hover:bg-sage-light hover:text-sage-secondary">
                 Lire l'article
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

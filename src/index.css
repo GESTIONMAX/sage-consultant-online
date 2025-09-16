@@ -245,4 +245,38 @@
   .navbar-blur {
     @apply backdrop-blur-md bg-background/80 border-b border-border/50;
   }
+
+  /* Shadow Components - Sage themed */
+  .shadow-sage-sm {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .shadow-sage-md {
+    box-shadow: var(--shadow-md);
+  }
+
+  .shadow-sage-lg {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .shadow-sage-xl {
+    box-shadow: var(--shadow-xl);
+  }
+
+  .shadow-sage-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .shadow-sage-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Utility shadow classes for hover states */
+  .hover-shadow-sage {
+    @apply transition-smooth hover:shadow-sage-elegant;
+  }
+
+  .hover-shadow-glow {
+    @apply transition-smooth hover:shadow-sage-glow;
+  }
 }

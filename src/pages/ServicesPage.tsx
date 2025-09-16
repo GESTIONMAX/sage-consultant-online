@@ -129,32 +129,33 @@ const ServicesPage = () => {
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-background to-background-secondary overflow-hidden">
-        {/* Pattern Background */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 25px 25px, hsl(var(--primary)) 2px, transparent 2px)`,
-            backgroundSize: '50px 50px'
-          }}></div>
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/services-sage.webp"
+            alt="Services Sage - Sécurité et technologie"
+            className="w-full h-full object-cover opacity-80"
+          />
         </div>
-        
-        {/* Geometric shapes */}
-        <div className="absolute top-10 left-10 w-20 h-20 bg-primary/30 rounded-full blur-xl"></div>
-        <div className="absolute top-32 right-20 w-16 h-16 bg-accent/25 rounded-lg rotate-45 blur-lg"></div>
-        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-muted/40 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-32 right-1/3 w-12 h-12 bg-primary/25 rotate-12 blur-lg"></div>
-        
-        {/* Content */}
+
+        {/* Subtle overlay elements */}
+        <div className="absolute top-10 right-10 w-32 h-32 bg-sage-primary/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-24 h-24 bg-sage-secondary/25 rounded-full blur-2xl"></div>
+
+        {/* Content with subtle background */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-sage-elegant border border-white/30">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
             Services professionnels Sage 100
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-            Des solutions complètes et personnalisées pour optimiser votre gestion 
+          <p className="text-xl text-white/90 leading-relaxed mb-8 drop-shadow-md">
+            Des solutions complètes et personnalisées pour optimiser votre gestion
             d'entreprise avec Sage 100. Accompagnement expert de A à Z.
           </p>
-          <CTAButton variant="primary" size="lg" icon="calendar">
+          <CTAButton variant="accent" size="lg" icon="calendar">
             Demander un devis gratuit
           </CTAButton>
+          </div>
         </div>
       </section>
 
@@ -282,7 +283,7 @@ const ServicesPage = () => {
             <CTAButton variant="accent" size="lg" icon="calendar">
               Prendre rendez-vous
             </CTAButton>
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+            <Button size="lg" className="bg-sage-white text-sage-primary border-sage-white hover:bg-sage-light hover:text-sage-secondary">
               Télécharger la brochure
             </Button>
           </div>

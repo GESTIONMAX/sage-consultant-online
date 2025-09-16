@@ -1,0 +1,63 @@
+:root {
+  --sage-primary: #00DC06;
+  --sage-secondary: #008a25;
+  --sage-dark: #333333;
+  --sage-light: #f5f5f5;
+  --sage-white: #ffffff;
+}
+
+/* Styles généraux */
+body {
+  color: var(--sage-dark);
+  background-color: var(--sage-white);
+}
+
+/* En-tête et navigation */
+.header {
+  background-color: var(--sage-dark);
+  border-bottom: 3px solid var(--sage-primary);
+}
+
+.nav-link {
+  color: var(--sage-white);
+}
+
+.nav-link:hover {
+  color: var(--sage-primary);
+}
+
+/* Boutons */
+.btn {
+  background-color: var(--sage-primary);
+  border: none;
+  color: var(--sage-white);
+}
+
+.btn:hover {
+  background-color: var(--sage-secondary);
+}
+
+/* Sections et conteneurs */
+.section-title {
+  color: var(--sage-dark);
+  border-bottom: 2px solid var(--sage-primary);
+}
+
+/* Tableaux */
+.table th {
+  background-color: var(--sage-dark);
+  color: var(--sage-white);
+}
+
+/* Formulaires */
+.form-control:focus {
+  border-color: var(--sage-primary);
+  box-shadow: 0 0 0 0.2rem rgba(0, 220, 6, 0.25);
+}
+
+/* Pied de page */
+.footer {
+  background-color: var(--sage-dark);
+  color: var(--sage-white);
+  border-top: 3px solid var(--sage-primary);
+}

@@ -129,7 +129,7 @@ const HomePage = () => {
                 <CTAButton variant="accent" size="lg" icon="calendar">
                   Prendre rendez-vous gratuit
                 </CTAButton>
-                <Button size="lg" variant="outline" className="text-white border-white/30 hover:bg-white/10">
+                <Button size="lg" className="bg-sage-white text-sage-primary border-sage-white hover:bg-sage-light hover:text-sage-secondary">
                   Découvrir les services
                 </Button>
               </div>
@@ -266,7 +266,7 @@ const HomePage = () => {
             <CTAButton variant="accent" size="lg" icon="calendar">
               Réserver un audit gratuit
             </CTAButton>
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+            <Button size="lg" className="bg-sage-white text-sage-primary border-sage-white hover:bg-sage-light hover:text-sage-secondary">
               <span>Voir tous les services</span>
             </Button>
           </div>
