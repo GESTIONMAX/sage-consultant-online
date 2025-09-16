@@ -12,7 +12,9 @@ CREATE TABLE IF NOT EXISTS users (
   phone TEXT,
   company TEXT,
   role TEXT NOT NULL CHECK (role IN ('admin', 'client')),
-  client_since DATE
+  client_since DATE,
+  last_login TIMESTAMP WITH TIME ZONE,
+  status TEXT CHECK (status IN ('active', 'inactive', 'pending')) DEFAULT 'active'
 );
 
 -- Create a trigger to update the updated_at column
@@ -63,7 +65,8 @@ END $$;
 CREATE TABLE IF NOT EXISTS service_features (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   service_id UUID REFERENCES services(id) ON DELETE CASCADE,
-  feature_text TEXT NOT NULL
+  name TEXT NOT NULL,
+  description TEXT
 );
 
 -- Client services table
@@ -72,6 +75,7 @@ CREATE TABLE IF NOT EXISTS client_services (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  service_id UUID REFERENCES services(id),
   title TEXT NOT NULL,
   description TEXT NOT NULL,
   service_date DATE NOT NULL,
@@ -94,12 +98,25 @@ END $$;
 CREATE TABLE IF NOT EXISTS documents (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
   client_service_id UUID REFERENCES client_services(id) ON DELETE CASCADE,
-  name TEXT NOT NULL,
-  type TEXT NOT NULL,
-  file_path TEXT NOT NULL,
-  size INTEGER
+  title TEXT NOT NULL,
+  description TEXT,
+  file_url TEXT NOT NULL,
+  file_type TEXT,
+  file_size INTEGER
 );
+
+-- Documents trigger
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'set_timestamp_documents') THEN
+    CREATE TRIGGER set_timestamp_documents
+    BEFORE UPDATE ON documents
+    FOR EACH ROW
+    EXECUTE FUNCTION trigger_set_timestamp();
+  END IF;
+END $$;
 
 -- Meetings table
 CREATE TABLE IF NOT EXISTS meetings (
@@ -107,13 +124,10 @@ CREATE TABLE IF NOT EXISTS meetings (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  client_service_id UUID REFERENCES client_services(id),
   title TEXT NOT NULL,
+  description TEXT,
   meeting_date DATE NOT NULL,
-  meeting_time TIME NOT NULL,
-  type TEXT CHECK (type IN ('Visioconférence', 'Sur site', 'Téléphone')),
-  status TEXT CHECK (status IN ('À venir', 'Planifié', 'Terminé', 'Annulé')),
-  notes TEXT,
+  status TEXT CHECK (status IN ('Planifié', 'Confirmé', 'Annulé', 'Terminé')),
   location TEXT
 );
 
@@ -135,9 +149,8 @@ CREATE TABLE IF NOT EXISTS messages (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
   sender_id UUID REFERENCES users(id) ON DELETE CASCADE,
   recipient_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  title TEXT NOT NULL,
   content TEXT NOT NULL,
-  status TEXT CHECK (status IN ('Non lu', 'Lu', 'Répondu', 'Résolu')),
+  read BOOLEAN DEFAULT false,
   parent_message_id UUID REFERENCES messages(id)
 );
 
@@ -158,11 +171,9 @@ CREATE TABLE IF NOT EXISTS testimonials (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
   user_id UUID REFERENCES users(id),
-  name TEXT NOT NULL,
-  role TEXT,
-  company TEXT,
   content TEXT NOT NULL,
   rating INTEGER CHECK (rating BETWEEN 1 AND 5),
+  service_id UUID REFERENCES services(id),
   is_approved BOOLEAN DEFAULT false,
   is_featured BOOLEAN DEFAULT false
 );
@@ -449,14 +460,14 @@ END $$;
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.users (id, email, role, client_since)
-  VALUES (NEW.id, NEW.email, 'client', CURRENT_DATE);
+  INSERT INTO public.users (id, email, role, client_since, status, last_login)
+  VALUES (NEW.id, NEW.email, 'client', CURRENT_DATE, 'active', now());
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- Create trigger for new user registration if it doesn't exist
-DO $$ 
+DO $$
 BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'on_auth_user_created') THEN
     CREATE TRIGGER on_auth_user_created
@@ -464,3 +475,59 @@ BEGIN
     FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
   END IF;
 END $$;
+
+-- Add performance indexes for authentication and queries
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
+CREATE INDEX IF NOT EXISTS idx_users_status ON users(status);
+CREATE INDEX IF NOT EXISTS idx_users_last_login ON users(last_login);
+CREATE INDEX IF NOT EXISTS idx_users_email_role ON users(email, role);
+
+CREATE INDEX IF NOT EXISTS idx_client_services_user_id ON client_services(user_id);
+CREATE INDEX IF NOT EXISTS idx_client_services_service_id ON client_services(service_id);
+CREATE INDEX IF NOT EXISTS idx_client_services_status ON client_services(status);
+CREATE INDEX IF NOT EXISTS idx_client_services_date ON client_services(service_date);
+
+CREATE INDEX IF NOT EXISTS idx_documents_client_service_id ON documents(client_service_id);
+CREATE INDEX IF NOT EXISTS idx_documents_file_type ON documents(file_type);
+
+CREATE INDEX IF NOT EXISTS idx_meetings_user_id ON meetings(user_id);
+CREATE INDEX IF NOT EXISTS idx_meetings_status ON meetings(status);
+CREATE INDEX IF NOT EXISTS idx_meetings_date ON meetings(meeting_date);
+
+CREATE INDEX IF NOT EXISTS idx_messages_sender_id ON messages(sender_id);
+CREATE INDEX IF NOT EXISTS idx_messages_recipient_id ON messages(recipient_id);
+CREATE INDEX IF NOT EXISTS idx_messages_read ON messages(read);
+CREATE INDEX IF NOT EXISTS idx_messages_created_at ON messages(created_at);
+
+CREATE INDEX IF NOT EXISTS idx_testimonials_user_id ON testimonials(user_id);
+CREATE INDEX IF NOT EXISTS idx_testimonials_service_id ON testimonials(service_id);
+CREATE INDEX IF NOT EXISTS idx_testimonials_approved ON testimonials(is_approved);
+CREATE INDEX IF NOT EXISTS idx_testimonials_featured ON testimonials(is_featured);
+
+CREATE INDEX IF NOT EXISTS idx_service_features_service_id ON service_features(service_id);
+CREATE INDEX IF NOT EXISTS idx_services_featured ON services(featured);
+CREATE INDEX IF NOT EXISTS idx_services_active ON services(is_active);
+
+-- Add comments for documentation
+COMMENT ON TABLE users IS 'Table des utilisateurs avec rôles admin/client et champs d authentification étendus';
+COMMENT ON COLUMN users.role IS 'Rôle de l utilisateur: admin ou client';
+COMMENT ON COLUMN users.status IS 'Statut du compte: active, inactive ou pending';
+COMMENT ON COLUMN users.last_login IS 'Dernière connexion de l utilisateur';
+COMMENT ON COLUMN users.client_since IS 'Date depuis laquelle l utilisateur est client';
+
+COMMENT ON TABLE client_services IS 'Services associés aux clients avec référence au service principal';
+COMMENT ON COLUMN client_services.service_id IS 'Référence vers le service principal dans la table services';
+
+COMMENT ON TABLE documents IS 'Documents associés aux services clients avec métadonnées de fichier';
+COMMENT ON COLUMN documents.file_url IS 'URL du fichier stocké';
+COMMENT ON COLUMN documents.file_type IS 'Type MIME du fichier';
+COMMENT ON COLUMN documents.file_size IS 'Taille du fichier en octets';
+
+COMMENT ON TABLE meetings IS 'Rendez-vous et réunions avec les clients';
+COMMENT ON COLUMN meetings.status IS 'Statut du rendez-vous: Planifié, Confirmé, Annulé ou Terminé';
+
+COMMENT ON TABLE messages IS 'Système de messagerie entre admin et clients';
+COMMENT ON COLUMN messages.read IS 'Indique si le message a été lu par le destinataire';
+
+COMMENT ON TABLE testimonials IS 'Témoignages clients avec possibilité d association à un service';
+COMMENT ON COLUMN testimonials.service_id IS 'Service associé au témoignage (optionnel)';

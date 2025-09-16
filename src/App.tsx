@@ -9,7 +9,20 @@ import AboutPage from "./pages/AboutPage";
 import ServicesPage from "./pages/ServicesPage";
 import ContactPage from "./pages/ContactPage";
 import BlogPage from "./pages/BlogPage";
+import ClientLogin from "./pages/ClientLogin";
+import ClientDashboard from "./pages/ClientDashboard";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/NewAdminDashboard";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import TestResetPassword from "./pages/TestResetPassword";
+import AuthTest from "./pages/AuthTest";
+import DirectAuthTest from "./pages/DirectAuthTest";
+import EmergencyAdmin from "./pages/EmergencyAdmin";
+import AdminInvitations from "./pages/AdminInvitations";
+import ClientActivation from "./pages/ClientActivation";
 import NotFound from "./pages/NotFound";
+import PrivateRoute from "./components/auth/PrivateRoute";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +40,44 @@ const App = () => (
             <Route path="contact" element={<ContactPage />} />
             <Route path="blog" element={<BlogPage />} />
           </Route>
+
+          {/* Authentication Routes */}
+          <Route path="client-login" element={<ClientLogin />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password" element={<ResetPassword />} />
+          <Route path="test-reset-password" element={<TestResetPassword />} />
+          <Route path="auth-test" element={<AuthTest />} />
+          <Route path="direct-auth-test" element={<DirectAuthTest />} />
+          <Route path="emergency-admin" element={<EmergencyAdmin />} />
+          <Route path="client-activation" element={<ClientActivation />} />
+          <Route path="admin" element={<AdminLogin />} />
+
+          {/* Protected Routes */}
+          <Route
+            path="client-dashboard"
+            element={
+              <PrivateRoute requiredRole="client">
+                <ClientDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="admin-dashboard"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="admin-invitations"
+            element={
+              <PrivateRoute requiredRole="admin">
+                <AdminInvitations />
+              </PrivateRoute>
+            }
+          />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

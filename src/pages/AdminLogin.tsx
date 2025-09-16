@@ -1,175 +1,215 @@
 import { useState } from 'react';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import {
-  Box,
-  Container,
-  TextField,
-  Button,
-  Typography,
-  Paper,
-  Link as MuiLink,
-  CircularProgress,
-  Alert,
-  InputAdornment,
-  IconButton
-} from '@mui/material';
-import { useAuth } from '../hooks/useAuth';
-import { logger } from '../lib/config';
-import { Visibility, VisibilityOff, AdminPanelSettings } from '@mui/icons-material';
+import { useNavigate, Link } from 'react-router-dom';
+import { useEnhancedAuth } from '../hooks/useEnhancedAuth';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2, Eye, EyeOff, Shield, ArrowLeft, Home } from 'lucide-react';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { signInWithEmail, user } = useAuth();
+  const { signInWithEmail, user, loading } = useEnhancedAuth();
 
-  // Rediriger vers le tableau de bord admin si déjà connecté en tant qu'admin
+  // Rediriger vers le dashboard admin si déjà connecté en tant qu'admin
   if (user && user.role === 'admin') {
-    navigate('/admin');
+    navigate('/admin-dashboard');
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
+
+    if (!email || !password) {
+      setError('Veuillez remplir tous les champs');
+      return;
+    }
 
     try {
-      logger.log('Tentative de connexion admin avec:', email);
-      // Attendre la connexion
-      const result = await signInWithEmail(email, password);
-      logger.log('Résultat de connexion:', result);
+      setIsLoading(true);
+      setError('');
 
-      if (result.error) {
-        throw new Error(result.error.message);
+      const { data, error: authError } = await signInWithEmail(email, password);
+
+      if (authError) {
+        setError(authError);
+        return;
       }
-      
-      // Attendre un court instant pour permettre à useAuth de mettre à jour l'utilisateur
-      setTimeout(() => {
-        // L'état de l'utilisateur a été mis à jour automatiquement par useAuth
-        // Le useEffect au début du composant redirigera vers /admin si l'utilisateur est admin
-        if (user?.role === 'admin') {
-          logger.log('Utilisateur admin déjà détecté, redirection automatique');
-          navigate('/admin');
-        } else {
-          logger.log('Rôle utilisateur non admin ou pas encore chargé:', user?.role);
-          setError('Accès refusé. Seuls les administrateurs peuvent se connecter ici. Si vous êtes administrateur, veuillez patienter ou rafraîchir la page.');
-          setLoading(false);
-        }
-      }, 1000);
 
+      // Vérifier que l'utilisateur est admin
+      if (!data?.user || data.user.role !== 'admin') {
+        setError('Accès refusé. Seuls les administrateurs peuvent se connecter ici.');
+        return;
+      }
+
+      navigate('/admin-dashboard');
     } catch (err: any) {
-      console.error('Erreur de connexion:', err);
-      setError(err.message || 'Une erreur est survenue lors de la connexion');
-      setLoading(false);
+      console.error('Erreur de connexion admin:', err);
+      setError('Une erreur est survenue lors de la connexion');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
-    <Container maxWidth="xs">
-      <Paper 
-        elevation={3} 
-        sx={{ 
-          mt: 8, 
-          p: 4, 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center',
-          borderTop: '5px solid #ffca28' // Bordure jaune pour indiquer espace admin
-        }}
-      >
-        <Box sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          mb: 3,
-          p: 1,
-          bgcolor: 'rgba(255, 202, 40, 0.1)',
-          borderRadius: 1
-        }}>
-          <AdminPanelSettings sx={{ color: '#ffca28', fontSize: 40, mr: 1 }} />
-          <Typography component="h1" variant="h5">
-            Connexion Administrateur
-          </Typography>
-        </Box>
+    <div className="min-h-screen bg-gradient-to-br from-sage-light to-background flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 right-10 w-32 h-32 bg-sage-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-24 h-24 bg-sage-secondary/15 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-yellow-400/20 rounded-full blur-2xl"></div>
+      </div>
 
-        {error && (
-          <Alert severity="error" sx={{ width: '100%', mb: 2 }}>
-            {error}
-          </Alert>
-        )}
+      <div className="relative max-w-md w-full space-y-8">
+        {/* Header avec Logo Sage et badge Admin */}
+        <div className="text-center">
+          <div className="flex justify-center mb-6">
+            <div className="bg-white rounded-2xl p-4 shadow-sage-elegant border-t-4 border-yellow-400">
+              <img
+                src="/sage-logo-green.svg"
+                alt="Sage 100"
+                className="h-12 w-auto"
+              />
+            </div>
+          </div>
 
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: '100%' }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Adresse email"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={loading}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Mot de passe"
-            type={showPassword ? 'text' : 'password'}
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={loading}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+          {/* Badge Administrateur */}
+          <div className="flex justify-center mb-4">
+            <div className="inline-flex items-center px-4 py-2 bg-yellow-400/90 text-yellow-900 rounded-full text-sm font-semibold shadow-lg">
+              <Shield className="h-5 w-5 mr-2" />
+              Espace Administrateur
+            </div>
+          </div>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, bgcolor: '#ffca28', color: '#212121', '&:hover': { bgcolor: '#ffb300' } }}
-            disabled={loading}
-          >
-            {loading ? <CircularProgress size={24} /> : 'Se connecter'}
-          </Button>
+          <h2 className="text-3xl font-bold text-sage-dark">
+            Connexion Admin
+          </h2>
+          <p className="mt-2 text-muted-foreground text-center">
+            Accès réservé aux administrateurs du système Sage 100
+          </p>
+        </div>
 
-          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between' }}>
-            <MuiLink component={RouterLink} to="/login" variant="body2">
-              Connexion standard
-            </MuiLink>
-            
-            <MuiLink component={RouterLink} to="/forgot-password" variant="body2">
-              Mot de passe oublié ?
-            </MuiLink>
-          </Box>
-        </Box>
-      </Paper>
+        {/* Formulaire de connexion */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-sage-elegant p-8 border border-sage-light">
+          {error && (
+            <Alert className="mb-6 border-red-200 bg-red-50">
+              <AlertDescription className="text-red-800">
+                {error}
+              </AlertDescription>
+            </Alert>
+          )}
 
-      <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 4 }}>
-        Accès réservé aux administrateurs uniquement
-      </Typography>
-    </Container>
+          <div className="mb-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+            <p className="text-sm text-yellow-800">
+              <strong>Sécurité :</strong> Cette interface est protégée et surveillée.
+              Seuls les administrateurs autorisés peuvent y accéder.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <Label htmlFor="email" className="text-sage-dark font-medium">
+                Adresse email administrateur
+              </Label>
+              <div className="mt-1 relative">
+                <Shield className="absolute left-3 top-3 h-5 w-5 text-sage-primary/60" />
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="pl-10 border-sage-light focus:border-sage-primary focus:ring-sage-primary"
+                  placeholder="admin@votre-domaine.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={isLoading}
+                  autoFocus
+                />
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="password" className="text-sage-dark font-medium">
+                Mot de passe sécurisé
+              </Label>
+              <div className="mt-1 relative">
+                <Input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  required
+                  className="pr-10 border-sage-light focus:border-sage-primary focus:ring-sage-primary"
+                  placeholder="••••••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5 text-sage-primary/60" />
+                  ) : (
+                    <Eye className="h-5 w-5 text-sage-primary/60" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full bg-yellow-500 text-yellow-900 hover:bg-yellow-400 font-semibold"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Connexion en cours...
+                </>
+              ) : (
+                <>
+                  <Shield className="mr-2 h-4 w-4" />
+                  Accéder à l'administration
+                </>
+              )}
+            </Button>
+          </form>
+
+          {/* Navigation */}
+          <div className="mt-8 pt-6 border-t border-sage-light/50">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link to="/client-login">
+                <Button variant="outline" className="border-sage-primary text-sage-primary hover:bg-sage-light">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Connexion client
+                </Button>
+              </Link>
+
+              <Link to="/">
+                <Button variant="ghost" className="text-sage-dark hover:bg-sage-light">
+                  <Home className="mr-2 h-4 w-4" />
+                  Accueil du site
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Informations sécurité */}
+        <div className="text-center">
+          <p className="text-xs text-muted-foreground">
+            Connexion sécurisée • Accès surveillé • Données protégées
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
