@@ -60,11 +60,11 @@ const Navbar = () => {
               </Link>
             )}
             <Link to="/client-login">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white">
                 Espace Client
               </Button>
             </Link>
-            <Button size="sm" className="btn-primary">
+            <Button size="sm" className="bg-sage-primary text-sage-white hover:bg-sage-secondary">
               <Calendar className="w-4 h-4 mr-2" />
               Prendre RDV
             </Button>
@@ -76,6 +76,7 @@ const Navbar = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-sage-primary hover:bg-sage-primary/10 hover:text-sage-primary"
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
@@ -111,11 +112,11 @@ const Navbar = () => {
                   </Link>
                 )}
                 <Link to="/client-login">
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white">
                     Espace Client
                   </Button>
                 </Link>
-                <Button className="w-full btn-primary">
+                <Button className="w-full bg-sage-primary text-sage-white hover:bg-sage-secondary">
                   <Calendar className="w-4 h-4 mr-2" />
                   Prendre RDV
                 </Button>
