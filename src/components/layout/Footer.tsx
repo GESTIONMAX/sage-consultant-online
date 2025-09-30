@@ -58,6 +58,8 @@ const Footer = () => {
               <li><Link to="/assistance" className="hover:text-foreground transition-smooth">Assistance</Link></li>
               <li><Link to="/blog" className="hover:text-foreground transition-smooth">Trucs & Astuces</Link></li>
               <li><Link to="/contact" className="hover:text-foreground transition-smooth">Contact</Link></li>
+              <li><Link to="/faq" className="hover:text-foreground transition-smooth">FAQ</Link></li>
+              <li><Link to="/geographic-demo" className="hover:text-foreground transition-smooth">Géolocalisation</Link></li>
               <li><Link to="/client" className="hover:text-foreground transition-smooth">Espace Client</Link></li>
             </ul>
           </div>

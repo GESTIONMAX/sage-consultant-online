@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import CTAButton from "@/components/ui/CTAButton";
+import AssistanceFAQ from "@/components/geographic/AssistanceFAQ";
 import { 
   Monitor, 
   Download,
@@ -351,6 +352,13 @@ const AssistancePage = () => {
               Télécharger TeamViewer
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <AssistanceFAQ />
         </div>
       </section>
     </div>
