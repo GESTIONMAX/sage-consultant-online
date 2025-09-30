@@ -39,8 +39,8 @@ const Navbar = () => {
                 to={item.href}
                 className={`transition-smooth px-3 py-2 rounded-md text-sm font-medium ${
                   isActive(item.href)
-                    ? "text-primary bg-primary-muted"
-                    : "text-muted-foreground hover:text-sage-black hover:bg-sage-light/30"
+                    ? "text-sage-primary bg-sage-primary/10 border-b-2 border-sage-primary"
+                    : "text-muted-foreground hover:text-sage-primary hover:bg-sage-primary/5"
                 }`}
               >
                 {item.name}
@@ -93,8 +93,8 @@ const Navbar = () => {
                   to={item.href}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-smooth ${
                     isActive(item.href)
-                      ? "text-primary bg-primary-muted"
-                      : "text-muted-foreground hover:text-sage-black hover:bg-sage-light/30"
+                      ? "text-sage-primary bg-sage-primary/10 border-l-4 border-sage-primary"
+                      : "text-muted-foreground hover:text-sage-primary hover:bg-sage-primary/5"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
