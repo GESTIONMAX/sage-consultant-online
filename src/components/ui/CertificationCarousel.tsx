@@ -63,16 +63,6 @@ const certifications: Certification[] = [
     status: 'active',
     category: 'Gestion Commerciale',
     image: '/lovable-uploads/certification-gestion-commerciale-sage-100.png'
-  },
-  {
-    id: 'sage-support',
-    title: 'Support Certifié',
-    provider: 'Sage Support',
-    year: '2024 - 2025',
-    description: 'Certification support technique pour l\'assistance et la maintenance Sage 100.',
-    status: 'active',
-    category: 'Support',
-    icon: <CheckCircle className="w-8 h-8" />
   }
 ];
 
