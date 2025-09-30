@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { startKeepAlive } from "@/lib/keep-alive";
 import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
@@ -29,6 +30,9 @@ import NotFound from "./pages/NotFound";
 import PrivateRoute from "./components/auth/PrivateRoute";
 
 const queryClient = new QueryClient();
+
+// Démarrer le keep-alive pour éviter les pauses Supabase
+startKeepAlive();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
