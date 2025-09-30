@@ -55,14 +55,14 @@ const certifications: Certification[] = [
     image: '/lovable-uploads/certification-paie-sage-100.png'
   },
   {
-    id: 'sage-formation',
-    title: 'Formateur Certifié',
-    provider: 'Sage Formation',
-    year: '2024 - 2026',
-    description: 'Certification formateur pour dispenser des formations officielles Sage 100.',
+    id: 'sage-100-gestion-commerciale',
+    title: 'Consultant Certifié',
+    provider: 'Sage 100 Gestion Commerciale',
+    year: '2024 - 2025',
+    description: 'Certification officielle Sage 100 Gestion Commerciale pour l\'optimisation des processus commerciaux.',
     status: 'active',
-    category: 'Formation',
-    icon: <Star className="w-8 h-8" />
+    category: 'Gestion Commerciale',
+    image: '/lovable-uploads/certification-gestion-commerciale-sage-100.png'
   },
   {
     id: 'sage-support',
