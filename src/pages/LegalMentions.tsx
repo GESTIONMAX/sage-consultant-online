@@ -16,8 +16,8 @@ export default function LegalMentions() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-br from-sage-primary/10 to-sage-secondary/10 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-gradient-to-br from-sage-primary/10 to-sage-secondary/10 py-20 min-h-[400px] flex items-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Mentions Légales
