@@ -32,7 +32,7 @@ const certifications: Certification[] = [
     description: 'Certification officielle Sage 100 Comptabilité pour la gestion comptable et financière.',
     status: 'active',
     category: 'Comptabilité',
-    image: '/lovable-uploads/CertifiedConsultant_Sage100Compta_2024_2025_FR (1).png'
+    image: '/lovable-uploads/Certification-comptabilite-sage-100.png'
   },
   {
     id: 'sage-100-finance',
@@ -42,7 +42,7 @@ const certifications: Certification[] = [
     description: 'Certification officielle Sage 100 Finance pour l\'accompagnement et la formation des entreprises.',
     status: 'active',
     category: 'Finance',
-    icon: <Award className="w-8 h-8" />
+    image: '/lovable-uploads/Cartification-finance-sage-100.png'
   },
   {
     id: 'sage-100-gestion',
