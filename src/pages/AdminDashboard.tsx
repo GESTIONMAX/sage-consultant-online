@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuthSimple as useAuth } from '../hooks/useAuth-simple';
 import { logger } from '../lib/config';
 import AdminClientsManager from '../components/admin/AdminClientsManager';
 import AdminServicesManager from '../components/admin/AdminServicesManager';

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../hooks/useAuth';
+import { useAuthSimple as useAuth } from '../hooks/useAuth-simple';
 import { supabase } from '../lib/supabase';
 import { logger } from '../lib/config';
 import {

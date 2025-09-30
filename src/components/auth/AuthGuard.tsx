@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthSimple as useAuth } from '../../hooks/useAuth-simple';
 
 interface AuthGuardProps {
   children: ReactNode;

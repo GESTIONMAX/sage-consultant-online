@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Calendar, ShieldCheck } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthSimple as useAuth } from "../../hooks/useAuth-simple";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
