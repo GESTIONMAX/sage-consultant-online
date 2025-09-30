@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import ServiceCard from "@/components/ui/ServiceCard";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import CTAButton from "@/components/ui/CTAButton";
+import CertificationCarousel from "@/components/ui/CertificationCarousel";
 import {
   Settings,
   Users,
@@ -229,6 +230,13 @@ const HomePage = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section className="py-20 bg-background-secondary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CertificationCarousel />
         </div>
       </section>
 
