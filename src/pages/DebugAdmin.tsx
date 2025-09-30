@@ -30,7 +30,7 @@ export default function DebugAdmin() {
     setIsFetchingUsers(true);
     try {
       const { data, error } = await supabase
-        .from('users')
+        .from('profiles')
         .select('*');
       
       if (error) throw error;
@@ -55,7 +55,7 @@ export default function DebugAdmin() {
     try {
       // Vérifier si l'utilisateur existe dans la table users
       const { data: existingUser, error: selectError } = await supabase
-        .from('users')
+        .from('profiles')
         .select('*')
         .eq('email', userEmail)
         .single();
@@ -67,7 +67,7 @@ export default function DebugAdmin() {
       if (existingUser) {
         // Mettre à jour le rôle de l'utilisateur existant
         const { error: updateError } = await supabase
-          .from('users')
+          .from('profiles')
           .update({ role: 'admin' })
           .eq('id', existingUser.id);
         

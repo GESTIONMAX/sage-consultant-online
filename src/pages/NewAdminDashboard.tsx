@@ -49,21 +49,35 @@ export default function NewAdminDashboard() {
 
   const loadStats = async () => {
     try {
-      const { data: users, error } = await supabase
-        .from('users')
-        .select('role, status');
+      // Essayer d'abord la fonction admin sécurisée
+      const { data: adminStats, error: adminError } = await supabase.rpc('get_profiles_stats');
 
-      if (error) throw error;
+      if (!adminError && adminStats) {
+        setStats({
+          totalUsers: adminStats.total_users,
+          activeUsers: adminStats.active_users,
+          pendingUsers: adminStats.pending_users,
+          admins: adminStats.admin_users,
+          clients: adminStats.client_users
+        });
+      } else {
+        // Fallback vers la requête directe
+        const { data: users, error } = await supabase
+          .from('profiles')
+          .select('role, status');
 
-      if (users) {
-        const stats: DashboardStats = {
-          totalUsers: users.length,
-          activeUsers: users.filter(u => u.status === 'active').length,
-          pendingUsers: users.filter(u => u.status === 'pending').length,
-          admins: users.filter(u => u.role === 'admin').length,
-          clients: users.filter(u => u.role === 'client').length
-        };
-        setStats(stats);
+        if (error) throw error;
+
+        if (users) {
+          const stats: DashboardStats = {
+            totalUsers: users.length,
+            activeUsers: users.filter(u => u.status === 'active').length,
+            pendingUsers: users.filter(u => u.status === 'pending').length,
+            admins: users.filter(u => u.role === 'admin').length,
+            clients: users.filter(u => u.role === 'client').length
+          };
+          setStats(stats);
+        }
       }
     } catch (error) {
       console.error('Erreur chargement stats:', error);

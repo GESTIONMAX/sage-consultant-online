@@ -115,7 +115,7 @@ ON CONFLICT (id) DO UPDATE SET
 
       // Vérifier dans public.users
       const { data: publicUsers, error: publicError } = await supabase
-        .from('users')
+        .from('profiles')
         .select('*')
         .eq('email', email);
 

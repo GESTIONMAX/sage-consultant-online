@@ -48,13 +48,22 @@ export default function AdminInvitations() {
   const loadUsers = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('users')
-        .select('*')
-        .order('client_since', { ascending: false });
 
-      if (error) throw error;
-      setUsers(data || []);
+      // Essayer d'abord la fonction admin sécurisée
+      const { data: adminData, error: adminError } = await supabase.rpc('get_all_profiles');
+
+      if (!adminError && adminData) {
+        setUsers(adminData);
+      } else {
+        // Fallback vers la requête directe
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        setUsers(data || []);
+      }
     } catch (error: any) {
       setMessage({ type: 'error', text: `Erreur de chargement: ${error.message}` });
     } finally {
@@ -71,26 +80,31 @@ export default function AdminInvitations() {
     try {
       setLoading(true);
 
-      // Créer l'utilisateur dans public.users
-      const { data: userData, error: userError } = await supabase
-        .from('users')
-        .insert({
-          email: invitationForm.email,
-          role: invitationForm.role,
-          full_name: invitationForm.full_name,
-          company: invitationForm.company,
-          status: 'pending',
-          client_since: new Date().toISOString().split('T')[0]
-        })
-        .select()
-        .single();
+      // Créer l'utilisateur via fonction RPC robuste (gère toutes les erreurs)
+      const { data: result, error: rpcError } = await supabase.rpc('create_profile_invitation', {
+        p_email: invitationForm.email,
+        p_role: invitationForm.role,
+        p_full_name: invitationForm.full_name,
+        p_company: invitationForm.company
+      });
 
-      if (userError) {
-        if (userError.code === '23505') {
-          throw new Error('Cet email existe déjà');
-        }
-        throw userError;
+      if (rpcError) {
+        throw new Error(`Erreur RPC: ${rpcError.message}`);
       }
+
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+
+      // Utiliser les données retournées par la fonction
+      const userData = {
+        id: result.user_id,
+        email: result.email,
+        role: result.role,
+        full_name: result.full_name,
+        company: result.company,
+        status: result.status
+      };
 
       // Générer le lien d'activation
       const activationToken = btoa(`${userData.id}:${invitationForm.email}:${Date.now()}`);
@@ -155,7 +169,7 @@ ${activationLink}
     try {
       setLoading(true);
       const { error } = await supabase
-        .from('users')
+        .from('profiles')
         .delete()
         .eq('id', userId);
 

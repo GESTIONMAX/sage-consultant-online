@@ -9,6 +9,7 @@ import AboutPage from "./pages/AboutPage";
 import ServicesPage from "./pages/ServicesPage";
 import ContactPage from "./pages/ContactPage";
 import BlogPage from "./pages/BlogPage";
+import AssistancePage from "./pages/AssistancePage";
 import ClientLogin from "./pages/ClientLogin";
 import ClientDashboard from "./pages/ClientDashboard";
 import AdminLogin from "./pages/AdminLogin";
@@ -37,6 +38,7 @@ const App = () => (
             <Route index element={<HomePage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="services" element={<ServicesPage />} />
+            <Route path="assistance" element={<AssistancePage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="blog" element={<BlogPage />} />
           </Route>

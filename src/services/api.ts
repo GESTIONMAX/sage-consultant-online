@@ -19,7 +19,7 @@ export const usersApi = {
     if (!sessionData.session) return null;
 
     const { data, error } = await supabase
-      .from('users')
+      .from('profiles')
       .select('*')
       .eq('id', sessionData.session.user.id)
       .single();
@@ -31,7 +31,7 @@ export const usersApi = {
   // Obtenir un utilisateur par son ID
   getById: async (id: string) => {
     const { data, error } = await supabase
-      .from('users')
+      .from('profiles')
       .select('*')
       .eq('id', id)
       .single();
@@ -43,7 +43,7 @@ export const usersApi = {
   // Mettre à jour un utilisateur
   update: async (id: string, updates: UpdateUser) => {
     const { data, error } = await supabase
-      .from('users')
+      .from('profiles')
       .update(updates)
       .eq('id', id)
       .select()

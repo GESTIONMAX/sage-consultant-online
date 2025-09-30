@@ -84,21 +84,21 @@ export function useEnhancedAuth(): AuthState & AuthActions {
       logger.log('Récupération des données utilisateur pour:', authUser.email);
 
       const { data, error } = await supabase
-        .from('users')
-        .select('role, full_name, phone, company, avatar_url, client_since, last_login, status')
+        .from('profiles')
+        .select('role, full_name, email, company, status, created_at, updated_at')
         .eq('id', authUser.id)
         .single();
 
       if (error) {
-        console.warn('Données utilisateur non trouvées dans la table users:', error);
+        console.warn('Données utilisateur non trouvées dans la table profiles:', error);
         // Retourner l'utilisateur avec un rôle par défaut 'client'
         return { ...authUser, role: 'client', status: 'active' } as EnhancedUser;
       }
 
       // Mettre à jour la dernière connexion
       await supabase
-        .from('users')
-        .update({ last_login: new Date().toISOString() })
+        .from('profiles')
+        .update({ updated_at: new Date().toISOString() })
         .eq('id', authUser.id);
 
       logger.log('Données utilisateur récupérées:', data);
@@ -107,11 +107,9 @@ export function useEnhancedAuth(): AuthState & AuthActions {
         ...authUser,
         role: data?.role as 'admin' | 'client' | undefined || 'client',
         full_name: data?.full_name,
-        phone: data?.phone,
         company: data?.company,
-        avatar_url: data?.avatar_url,
-        client_since: data?.client_since,
-        last_login: data?.last_login,
+        client_since: data?.created_at,
+        last_login: data?.updated_at,
         status: data?.status || 'active'
       };
 
@@ -349,9 +347,9 @@ export function useEnhancedAuth(): AuthState & AuthActions {
     setState(prev => ({ ...prev, loading: true, error: null }));
 
     try {
-      // Mettre à jour les données dans la table users
+      // Mettre à jour les données dans la table profiles
       const { error: dbError } = await supabase
-        .from('users')
+        .from('profiles')
         .update(updates)
         .eq('id', state.user.id);
 

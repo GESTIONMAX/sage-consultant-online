@@ -109,7 +109,7 @@ const BlogPage = () => {
         {/* Content */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Blog & Ressources
+            Trucs & Astuces
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
             Conseils d'expert, guides pratiques et ressources gratuites 

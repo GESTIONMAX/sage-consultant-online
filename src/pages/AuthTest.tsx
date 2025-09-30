@@ -22,7 +22,7 @@ export default function AuthTest() {
       // Test 1: Vérifier si l'utilisateur existe
       addResult('Test 1: Vérification utilisateur...');
       const { data: user, error: userError } = await supabase
-        .from('users')
+        .from('profiles')
         .select('*')
         .eq('email', email)
         .single();

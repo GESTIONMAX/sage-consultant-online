@@ -51,7 +51,7 @@ export default function AdminClientsManager() {
       setLoading(true);
       // Récupérer tous les utilisateurs
       const { data: usersData, error: usersError } = await supabase
-        .from('users')
+        .from('profiles')
         .select('*');
         
       if (usersError) throw usersError;
@@ -114,7 +114,7 @@ export default function AdminClientsManager() {
         
         // Supprimer l'utilisateur de la table users
         const { error: deleteError } = await supabase
-          .from('users')
+          .from('profiles')
           .delete()
           .eq('id', id);
           
@@ -142,7 +142,7 @@ export default function AdminClientsManager() {
       }
       
       const { error } = await supabase
-        .from('users')
+        .from('profiles')
         .update({
           full_name: selectedUser.full_name,
           company: selectedUser.company,

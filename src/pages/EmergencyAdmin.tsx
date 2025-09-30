@@ -56,7 +56,7 @@ export default function EmergencyAdmin() {
     try {
       // Créer directement dans public.users d'abord
       const { data: userData, error: userError } = await supabase
-        .from('users')
+        .from('profiles')
         .insert({
           email: email,
           role: 'admin',

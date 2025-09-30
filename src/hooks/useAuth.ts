@@ -26,7 +26,7 @@ export function useAuth() {
     
     // Récupérer les informations utilisateur depuis la table users
     const { data, error } = await supabase
-      .from('users')
+      .from('profiles')
       .select('role, full_name, phone, company, avatar_url, client_since')
       .eq('id', authUser.id)
       .single();

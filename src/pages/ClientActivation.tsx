@@ -69,7 +69,7 @@ export default function ClientActivation() {
 
       // Récupérer les données utilisateur
       const { data: user, error } = await supabase
-        .from('users')
+        .from('profiles')
         .select('*')
         .eq('id', userId)
         .eq('email', email)
@@ -152,7 +152,7 @@ WHERE email = '${activationData.email}';`;
 
       // Mettre à jour le statut dans public.users
       const { error: updateError } = await supabase
-        .from('users')
+        .from('profiles')
         .update({
           status: 'active',
           last_login: new Date().toISOString()
