@@ -12,6 +12,7 @@ import BlogPage from "./pages/BlogPage";
 import AssistancePage from "./pages/AssistancePage";
 import GeographicDemo from "./pages/GeographicDemo";
 import FAQPage from "./pages/FAQPage";
+import LegalMentions from "./pages/LegalMentions";
 import ClientLogin from "./pages/ClientLogin";
 import ClientDashboard from "./pages/ClientDashboard";
 import AdminLogin from "./pages/AdminLogin";
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="blog" element={<BlogPage />} />
             <Route path="geographic-demo" element={<GeographicDemo />} />
             <Route path="faq" element={<FAQPage />} />
+            <Route path="legal-mentions" element={<LegalMentions />} />
           </Route>
 
           {/* Authentication Routes */}

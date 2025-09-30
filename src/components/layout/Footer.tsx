@@ -66,7 +66,7 @@ const Footer = () => {
               © 2024 SAS 1 GESTION. Tous droits réservés.
             </p>
             <div className="mt-4 md:mt-0 flex space-x-6 text-sm text-muted-foreground">
-              <Link to="/legal" className="hover:text-foreground transition-smooth">Mentions légales</Link>
+              <Link to="/legal-mentions" className="hover:text-foreground transition-smooth">Mentions légales</Link>
               <Link to="/privacy" className="hover:text-foreground transition-smooth">Confidentialité</Link>
               <Link to="/terms" className="hover:text-foreground transition-smooth">CGV</Link>
               <Link to="/admin-login" className="hover:text-foreground transition-smooth opacity-50 hover:opacity-100">Admin</Link>
