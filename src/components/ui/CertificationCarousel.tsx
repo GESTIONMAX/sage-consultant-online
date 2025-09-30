@@ -20,19 +20,10 @@ interface Certification {
   status: 'active' | 'expired' | 'renewed';
   category: string;
   icon?: React.ReactNode;
+  image?: string;
 }
 
 const certifications: Certification[] = [
-  {
-    id: 'sage-100-finance',
-    title: 'Consultant Certifié',
-    provider: 'Sage 100 Finance',
-    year: '2024 - 2025',
-    description: 'Certification officielle Sage 100 Finance pour l\'accompagnement et la formation des entreprises.',
-    status: 'active',
-    category: 'Finance',
-    icon: <Award className="w-8 h-8" />
-  },
   {
     id: 'sage-100-comptabilite',
     title: 'Consultant Certifié',
@@ -41,6 +32,16 @@ const certifications: Certification[] = [
     description: 'Certification officielle Sage 100 Comptabilité pour la gestion comptable et financière.',
     status: 'active',
     category: 'Comptabilité',
+    image: '/lovable-uploads/CertifiedConsultant_Sage100Compta_2024_2025_FR (1).png'
+  },
+  {
+    id: 'sage-100-finance',
+    title: 'Consultant Certifié',
+    provider: 'Sage 100 Finance',
+    year: '2024 - 2025',
+    description: 'Certification officielle Sage 100 Finance pour l\'accompagnement et la formation des entreprises.',
+    status: 'active',
+    category: 'Finance',
     icon: <Award className="w-8 h-8" />
   },
   {
@@ -172,11 +173,21 @@ export default function CertificationCarousel() {
             <div key={cert.id} className="w-full flex-shrink-0 px-2">
               <Card className="h-full border-2 hover:shadow-elegant transition-smooth">
                 <CardContent className="p-8 text-center">
-                  {/* Certification Icon */}
-                  <div className="w-20 h-20 bg-sage-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <div className="text-sage-primary">
-                      {cert.icon}
-                    </div>
+                  {/* Certification Image/Icon */}
+                  <div className="w-32 h-20 flex items-center justify-center mx-auto mb-6">
+                    {cert.image ? (
+                      <img 
+                        src={cert.image} 
+                        alt={`${cert.provider} Certification`}
+                        className="max-w-full max-h-full object-contain rounded-lg shadow-sm"
+                      />
+                    ) : (
+                      <div className="w-20 h-20 bg-sage-primary/10 rounded-full flex items-center justify-center">
+                        <div className="text-sage-primary">
+                          {cert.icon}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Certification Info */}
