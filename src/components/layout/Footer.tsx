@@ -6,14 +6,9 @@ const Footer = () => {
     <footer className="bg-background-secondary border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand avec Logo Sage */}
+          {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-3 mb-4">
-              <img
-                src="/sage-logo-green.svg"
-                alt="Sage Logo"
-                className="h-10 w-auto"
-              />
+            <div className="mb-4">
               <div>
                 <span className="font-bold text-xl text-sage-dark block">SAS 1 GESTION</span>
                 <span className="text-sm text-sage-primary font-medium">Consultant Sage Certifié</span>

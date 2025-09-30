@@ -25,13 +25,8 @@ const Navbar = () => {
     <nav className="fixed top-0 w-full z-50 navbar-blur">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo avec Sage */}
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img
-              src="/sage-logo-green.svg"
-              alt="Sage Logo"
-              className="h-8 w-auto"
-            />
             <span className="font-bold text-xl text-sage-dark">SAS 1 GESTION</span>
             <span className="text-sm text-sage-primary font-medium hidden sm:block">Consultant Sage Certifié</span>
           </Link>
