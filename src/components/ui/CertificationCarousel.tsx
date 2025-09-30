@@ -45,14 +45,14 @@ const certifications: Certification[] = [
     image: '/lovable-uploads/Cartification-finance-sage-100.png'
   },
   {
-    id: 'sage-100-gestion',
+    id: 'sage-100-paie',
     title: 'Consultant Certifié',
-    provider: 'Sage 100 Gestion',
-    year: '2023 - 2024',
-    description: 'Certification Sage 100 Gestion pour l\'optimisation des processus de gestion d\'entreprise.',
-    status: 'renewed',
-    category: 'Gestion',
-    icon: <Award className="w-8 h-8" />
+    provider: 'Sage 100 Paie',
+    year: '2024 - 2025',
+    description: 'Certification officielle Sage 100 Paie pour la gestion de la paie et des ressources humaines.',
+    status: 'active',
+    category: 'Paie',
+    image: '/lovable-uploads/certification-paie-sage-100.png'
   },
   {
     id: 'sage-formation',
