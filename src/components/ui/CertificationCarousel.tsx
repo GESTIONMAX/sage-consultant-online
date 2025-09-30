@@ -171,18 +171,22 @@ export default function CertificationCarousel() {
         >
           {certifications.map((cert, index) => (
             <div key={cert.id} className="w-full flex-shrink-0 px-2">
-              <Card className="h-full border-2 hover:shadow-elegant transition-smooth">
-                <CardContent className="p-8 text-center">
+              <Card className={`h-full border-2 hover:shadow-elegant transition-smooth ${
+                cert.image ? 'border-sage-primary/30 bg-gradient-to-br from-sage-primary/5 to-sage-secondary/5' : 'border-border'
+              }`}>
+                <CardContent className={`p-8 text-center ${cert.image ? 'pb-6' : ''}`}>
                   {/* Certification Image/Icon */}
-                  <div className="w-32 h-20 flex items-center justify-center mx-auto mb-6">
+                  <div className="w-full flex items-center justify-center mx-auto mb-6">
                     {cert.image ? (
-                      <img 
-                        src={cert.image} 
-                        alt={`${cert.provider} Certification`}
-                        className="max-w-full max-h-full object-contain rounded-lg shadow-sm"
-                      />
+                      <div className="w-full max-w-sm h-32 flex items-center justify-center bg-gradient-to-br from-sage-primary/5 to-sage-secondary/5 rounded-xl p-4 border border-sage-primary/20">
+                        <img 
+                          src={cert.image} 
+                          alt={`${cert.provider} Certification`}
+                          className="w-full h-full object-contain rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
                     ) : (
-                      <div className="w-20 h-20 bg-sage-primary/10 rounded-full flex items-center justify-center">
+                      <div className="w-24 h-24 bg-sage-primary/10 rounded-full flex items-center justify-center">
                         <div className="text-sage-primary">
                           {cert.icon}
                         </div>
@@ -193,6 +197,13 @@ export default function CertificationCarousel() {
                   {/* Certification Info */}
                   <div className="space-y-4">
                     <div>
+                      {cert.image && (
+                        <div className="flex items-center justify-center mb-3">
+                          <Badge className="bg-sage-primary text-sage-white text-xs font-medium">
+                            Certification Officielle
+                          </Badge>
+                        </div>
+                      )}
                       <h3 className="text-xl font-bold text-foreground mb-2">
                         {cert.title}
                       </h3>
@@ -221,9 +232,20 @@ export default function CertificationCarousel() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <p className={`text-muted-foreground text-sm leading-relaxed ${
+                      cert.image ? 'font-medium' : ''
+                    }`}>
                       {cert.description}
                     </p>
+                    
+                    {/* Special highlight for image certifications */}
+                    {cert.image && (
+                      <div className="mt-4 p-3 bg-sage-primary/10 rounded-lg border border-sage-primary/20">
+                        <p className="text-sage-primary text-xs font-semibold text-center">
+                          ✓ Badge officiel Sage • Vérifiable en ligne
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
