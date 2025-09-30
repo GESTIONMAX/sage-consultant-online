@@ -230,11 +230,11 @@ export default function GeographicFAQ() {
               Notre équipe est là pour vous accompagner dans l'utilisation du système de géolocalisation.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button className="btn-primary">
+              <Button className="bg-sage-primary text-sage-white hover:bg-sage-secondary">
                 <Phone className="w-4 h-4 mr-2" />
                 Nous contacter
               </Button>
-              <Button variant="outline">
+              <Button variant="outline" className="border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white">
                 <Mail className="w-4 h-4 mr-2" />
                 Envoyer un email
               </Button>

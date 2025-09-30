@@ -231,15 +231,15 @@ export default function AssistanceFAQ() {
               Notre équipe d'experts Sage 100 est disponible pour vous accompagner selon votre zone géographique.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button className="btn-primary">
+              <Button className="bg-sage-primary text-sage-white hover:bg-sage-secondary">
                 <Phone className="w-4 h-4 mr-2" />
                 Appeler maintenant
               </Button>
-              <Button variant="outline">
+              <Button variant="outline" className="border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white">
                 <Mail className="w-4 h-4 mr-2" />
                 Envoyer un email
               </Button>
-              <Button variant="outline">
+              <Button variant="outline" className="border-sage-dark text-sage-dark hover:bg-sage-dark hover:text-sage-white">
                 <Download className="w-4 h-4 mr-2" />
                 Télécharger TeamViewer
               </Button>

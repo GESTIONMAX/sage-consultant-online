@@ -193,7 +193,11 @@ export default function ZoneSelector({ onZoneChange, showDetails = true, classNa
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
             />
-            <Button onClick={handleSearch} disabled={!searchInput.trim()}>
+            <Button 
+              onClick={handleSearch} 
+              disabled={!searchInput.trim()}
+              className="bg-sage-primary text-sage-white hover:bg-sage-secondary disabled:opacity-50"
+            >
               <Search className="w-4 h-4" />
             </Button>
           </div>
@@ -202,7 +206,7 @@ export default function ZoneSelector({ onZoneChange, showDetails = true, classNa
             <Button 
               variant="outline" 
               onClick={() => setShowManualSelection(!showManualSelection)}
-              className="flex-1"
+              className="flex-1 border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white"
             >
               <Navigation className="w-4 h-4 mr-2" />
               Choisir manuellement
@@ -210,7 +214,7 @@ export default function ZoneSelector({ onZoneChange, showDetails = true, classNa
             <Button 
               variant="outline" 
               onClick={handleReset}
-              className="flex-1"
+              className="flex-1 border-sage-dark text-sage-dark hover:bg-sage-dark hover:text-sage-white"
             >
               <RefreshCw className="w-4 h-4 mr-2" />
               Redétecter
@@ -227,7 +231,11 @@ export default function ZoneSelector({ onZoneChange, showDetails = true, classNa
                     key={zone.id}
                     variant={detectedZone?.id === zone.id ? "default" : "outline"}
                     onClick={() => handleZoneSelect(zone.id)}
-                    className="justify-start"
+                    className={`justify-start ${
+                      detectedZone?.id === zone.id 
+                        ? "bg-sage-primary text-sage-white hover:bg-sage-secondary" 
+                        : "border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white"
+                    }`}
                   >
                     <MapPin className="w-4 h-4 mr-2" />
                     {zone.name}

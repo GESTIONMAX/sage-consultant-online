@@ -148,7 +148,7 @@ const FAQPage = () => {
                 Questions spécifiques sur le système de géolocalisation intelligent
               </p>
               <Button 
-                className="btn-primary"
+                className="bg-sage-primary text-sage-white hover:bg-sage-secondary"
                 onClick={() => window.location.href = '/geographic-demo'}
               >
                 <Navigation className="w-4 h-4 mr-2" />
@@ -165,7 +165,7 @@ const FAQPage = () => {
                 Questions sur TeamViewer, support technique et formation
               </p>
               <Button 
-                className="btn-primary"
+                className="bg-sage-primary text-sage-white hover:bg-sage-secondary"
                 onClick={() => window.location.href = '/assistance'}
               >
                 <Monitor className="w-4 h-4 mr-2" />
@@ -182,7 +182,7 @@ const FAQPage = () => {
                 Différences entre services PACA et Île-de-France
               </p>
               <Button 
-                className="btn-primary"
+                className="bg-sage-primary text-sage-white hover:bg-sage-secondary"
                 onClick={() => window.location.href = '/services'}
               >
                 <Settings className="w-4 h-4 mr-2" />
@@ -246,11 +246,11 @@ const FAQPage = () => {
                 selon votre zone géographique.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="btn-primary">
+                <Button className="bg-sage-primary text-sage-white hover:bg-sage-secondary">
                   <Phone className="w-4 h-4 mr-2" />
                   Appeler maintenant
                 </Button>
-                <Button variant="outline">
+                <Button variant="outline" className="border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white">
                   <Mail className="w-4 h-4 mr-2" />
                   Envoyer un email
                 </Button>

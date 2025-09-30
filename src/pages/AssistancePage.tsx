@@ -187,7 +187,7 @@ const AssistancePage = () => {
                 <div className="space-y-2">
                   {service.downloadLink && (
                     <Button 
-                      className="w-full btn-primary"
+                      className="w-full bg-sage-primary text-sage-white hover:bg-sage-secondary"
                       onClick={() => window.open(service.downloadLink, '_blank')}
                     >
                       <Download className="w-4 h-4 mr-2" />
@@ -197,7 +197,7 @@ const AssistancePage = () => {
                   {service.helpLink && (
                     <Button 
                       variant="outline" 
-                      className="w-full"
+                      className="w-full border-sage-primary text-sage-primary hover:bg-sage-primary hover:text-sage-white"
                       onClick={() => window.open(service.helpLink, '_blank')}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
@@ -243,7 +243,7 @@ const AssistancePage = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="w-full"
+                  className="w-full border-sage-dark text-sage-dark hover:bg-sage-dark hover:text-sage-white"
                   onClick={() => {
                     if (action.action === 'appointment') {
                       window.location.href = action.link;
@@ -345,7 +345,7 @@ const AssistancePage = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              className="bg-transparent border-sage-white text-sage-white hover:bg-sage-white hover:text-sage-primary"
               onClick={() => window.open('https://www.teamviewer.com/fr/download/windows/', '_blank')}
             >
               <Download className="w-4 h-4 mr-2" />
